@@ -1,34 +1,37 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
+const { protect } = require('../middleware/auth');
+const {
+  getContacts,
+  getContact,
+  updateContact,
+  deleteContact,
+  createContact
+} = require("../controllers/contacts");
 
-// GET api/contacts
+// GET /api/contacts
 // Get all user's contacts
 // PRIVATE
-router.get('/', (req, res) => {
-    res.send('Get users contacts')
-})
+router.get('/', protect, getContacts)
 
-// POST api/contacts
+// GET /api/contacts/:contactID
+// Gets single contact
+// Private
+router.get('/:contactID', protect, getContact)
+
+// POST /api/contacts
 // Add new contact
 // PRIVATE
-router.post('/', (req, res) => {
-    res.send('Create new contact')
-})
+router.post('/', protect, createContact)
 
-// PUT api/contacts
+// PUT /api/contacts/:contactID
 // Update user's contact
 // PRIVATE
-router.put('/:contactID', (req, res) => {
-    res.send('Update a contact')
-})
+router.put('/:contactID', protect, updateContact)
 
-// DELETE api/contacts
+// DELETE /api/contacts/:contactID
 // Delete a user's contact
 // PRIVATE
-router.delete('/:contactID', (req, res) => {
-    res.send('Contact DELETED!')
-})
-
-
+router.delete('/:contactID', protect, deleteContact)
 
 module.exports = router;

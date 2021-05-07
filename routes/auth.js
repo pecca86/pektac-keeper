@@ -1,16 +1,19 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
+const { protect } = require('../middleware/auth');
+const { getLoggedInUser, login, logout } = require("../controllers/auth");
 
 // GET api/auth
 // PRIVATE
-router.get('/', (req, res) => {
-    res.send('Get logged in user')
-})
+router.get('/', protect, getLoggedInUser)
+
+// GET /api/auth/logout
+// PRIVATE
+router.get('/logout', protect, logout);
+
 
 // POST api/auth
 // PUBLIC
-router.post('/', (req, res) => {
-    res.send('Log in user')
-})
+router.route('/').post(login)
 
 module.exports = router;
