@@ -5,7 +5,8 @@ const ContactFilter = () => {
   const contactContext = useContext(ContactContext);
   const { filteredContacts, clearFilters, filtered } = contactContext;
   // form created with react useRef
-  const filterText = useRef();
+  const filterText = useRef('');
+
 
   useEffect(() => {
     if (filtered === null) {
@@ -16,7 +17,7 @@ const ContactFilter = () => {
   const onChange = (e) => {
     e.preventDefault();
     // get the value of input field with useRef
-    if (filterText.current.value !== "") {
+    if (filterText.current.value !== '') {
       filteredContacts(e.target.value);
     } else {
       clearFilters();
@@ -37,7 +38,7 @@ const ContactFilter = () => {
         type="text"
         placeholder="Filter contacts by name / email..."
       />
-      {filterText.current.value !== "" && (
+      {filterText.current.value && (
         <button onClick={onClear} className="btn btn-light">
           Clear
         </button>

@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import ContactContext from "../../context/contact/contactContext";
 import ContactItem from "./ContactItem";
-import ContactFilter from "./ContactFilter";
 
 const Contacts = () => {
   //initialize the context of this component
@@ -12,7 +11,6 @@ const Contacts = () => {
 
   return (
     <Fragment>
-      <ContactFilter />
       {filtered
         ? filtered.map((contact) => (
             <h4>
