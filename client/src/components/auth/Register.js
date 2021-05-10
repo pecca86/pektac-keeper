@@ -1,9 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AlertContext from "../../context/alert/alertContext";
+import AuthContext from "../../context/auth/authContext";
 
 const Register = () => {
+  // ALERT STATE
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
+
+  // AUTH STATE
+  const authContext = useContext(AuthContext);
+  const { registerUser, error, clearErrors, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if (error === "Key / field value already taken.") {
+      setAlert("Email already registered!", "danger");
+      clearErrors();
+    } else if (isAuthenticated) {
+      setAlert("Registered successfully!", "success");
+    }
+  }, [error, isAuthenticated]);
 
   const [user, setUser] = useState({
     name: "",
@@ -26,7 +41,7 @@ const Register = () => {
     e.preventDefault();
 
     if (checkIfPasswordMaches()) {
-      setAlert("Registered!", "success");
+      registerUser(user);
     } else {
       setAlert("Please check password", "danger");
     }
