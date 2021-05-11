@@ -9,7 +9,14 @@ import AuthState from "./context/auth/AuthState";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import AlertState from "./context/alert/AlertState";
-import Alerts from "./components/layout/Alerts"
+import Alerts from "./components/layout/Alerts";
+import setAuthToken from "./utils/setAuthToken";
+
+// check if there is a token set in localstorage
+// This runs everytime the app loads
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
   return (

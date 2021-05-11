@@ -9,6 +9,7 @@ import {
   CLEAR_ERRORS,
 } from "../types";
 
+// eslint-disable-next-line
 export default (state, action) => {
   switch (action.type) {
     case REGISTER_SUCCES:
@@ -32,9 +33,21 @@ export default (state, action) => {
         error: action.payload,
       };
     case USER_LOADED:
-      return "";
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload,
+      };
     case AUTH_ERROR:
-      return "";
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: true,
+        user: null,
+        error: action.payload,
+      };
     case LOGIN_SUCCESS:
       return "";
     case LOGIN_FAIL:
@@ -43,9 +56,9 @@ export default (state, action) => {
       return "";
     case CLEAR_ERRORS:
       return {
-          ...state,
-          error: null
-      }
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
