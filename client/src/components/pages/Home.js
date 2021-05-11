@@ -7,11 +7,13 @@ import AuthContext from "../../context/auth/authContext";
 const Home = () => {
   // we need to call load user in order for the user to stay inside the app state
   const authContext = useContext(AuthContext);
-  const { loadUser } = authContext;
+  const { loadUser, token } = authContext;
 
   // make this run as soon as the component loads
   useEffect(() => {
-    loadUser();
+    if (token) {
+      loadUser();
+    }
     // eslint-disable-next-line
   }, []); // empty bracket makes this run just once
 
