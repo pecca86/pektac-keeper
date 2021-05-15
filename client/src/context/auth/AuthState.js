@@ -4,7 +4,7 @@ import authReducer from "./authReducer";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import {
-  REGISTER_SUCCES,
+  REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
@@ -52,7 +52,7 @@ const AuthState = (props) => {
     try {
       const res = await axios.post("/api/users", userData, config);
       dispatch({
-        type: REGISTER_SUCCES,
+        type: REGISTER_SUCCESS,
         payload: res.data, // the token
       });
       // loadUser into state

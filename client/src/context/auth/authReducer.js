@@ -1,5 +1,5 @@
 import {
-  REGISTER_SUCCES,
+  REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
@@ -12,7 +12,7 @@ import {
 // eslint-disable-next-line
 export default (state, action) => {
   switch (action.type) {
-    case REGISTER_SUCCES:
+    case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       // put token inside localStorage
       localStorage.setItem("token", action.payload.token);
