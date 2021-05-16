@@ -3,7 +3,7 @@ import ContactContext from "../../context/contact/contactContext";
 
 const ContactFilter = () => {
   const contactContext = useContext(ContactContext);
-  const { filteredContacts, clearFilters, filtered } = contactContext;
+  const { filterContacts, clearFilter, filtered } = contactContext;
   // form created with react useRef
   const filterText = useRef('');
 
@@ -18,15 +18,15 @@ const ContactFilter = () => {
     e.preventDefault();
     // get the value of input field with useRef
     if (filterText.current.value !== '') {
-      filteredContacts(e.target.value);
+      filterContacts(e.target.value);
     } else {
-      clearFilters();
+      clearFilter();
     }
   };
 
   const onClear = (e) => {
     e.preventDefault();
-    clearFilters();
+    clearFilter();
     filterText.current.value = "";
   };
 

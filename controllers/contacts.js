@@ -52,7 +52,17 @@ module.exports.createContact = wrapAsync(async (req, res, next) => {
 // Updates existing contact
 // Private
 module.exports.updateContact = wrapAsync(async (req, res, next) => {
+  const { name, email, phone, type } = req.body;
+
+  // Build contact object
+  const contactFields = {};
+  if (name) contactFields.name = name;
+  if (email) contactFields.email = email;
+  if (phone) contactFields.phone = phone;
+  if (type) contactFields.type = type;
+
   let contact = await Contact.findById(req.params.contactID);
+
   if (!contact) {
     return next(new AppError("No contact found", 404));
   }
@@ -61,10 +71,11 @@ module.exports.updateContact = wrapAsync(async (req, res, next) => {
     return next(new AppError("Unauthorized!", 401));
   }
 
-  contact = await Contact.findOneAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  contact = await Contact.findByIdAndUpdate(
+    req.params.contactID,
+    { $set: contactFields },
+    { new: true }
+  );
 
   res.status(201).json({
     contact,

@@ -45,18 +45,3 @@ exports.protect = wrapAsync(async (req, res, next) => {
     });
   }
 });
-
-// Grant access to specific roles
-// Takes in a CSV of different roles
-exports.authorize = (...roles) => {
-  // Returns a middleware function
-  return (req, res, next) => {
-    // check if currently logged in user has one of the specified roles
-    if (!roles.includes(req.user.role)) {
-      return next(
-        new AppError(`User role ${req.user.role} not granted access!`, 403)
-      ); // 403 = forbidden
-    }
-    next();
-  };
-};
