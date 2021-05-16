@@ -53,7 +53,7 @@ module.exports.createContact = wrapAsync(async (req, res, next) => {
 // Private
 module.exports.updateContact = wrapAsync(async (req, res, next) => {
   const { name, email, phone, type } = req.body;
-
+git 
   // Build contact object
   const contactFields = {};
   if (name) contactFields.name = name;
