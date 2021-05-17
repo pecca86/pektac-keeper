@@ -9,9 +9,9 @@ app.use(cookieParser());
 
 // === ENVIROMENT VARS ===
 const dotenv = require("dotenv");
-if (process.env.NODE_ENV !== "production") {
+/* if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: "./config/config.env" });
-}
+} */
 
 // === CONNECT TO MONGO DB TROUGH MONGOOSE ===
 const connectDB = require("./config/db");
