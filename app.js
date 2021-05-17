@@ -9,12 +9,27 @@ app.use(cookieParser());
 
 // === ENVIROMENT VARS ===
 const dotenv = require("dotenv");
-/* if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: "./config/config.env" });
-} */
+}
 
 // === CONNECT TO MONGO DB TROUGH MONGOOSE ===
-const connectDB = require("./config/db");
+// connect to our mongo DB
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    });
+
+    // print out to verify that we are connected
+    console.log(`MongoDB connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log("Failed connecting to MongoDB - ", error);
+  }
+};
 connectDB();
 
 // == MIDDLEWARE ===
